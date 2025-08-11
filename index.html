@@ -16,10 +16,10 @@
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(function(OneSignal) {
         OneSignal.init({
-          appId: "YOUR_ONESIGNAL_APP_ID", // يجب استبدال هذا بمعرف التطبيق الخاص بك
+          appId:"76ccb823-3b62-41e9-9052-6a06b51e2c87", // يجب استبدال هذا بمعرف التطبيق الخاص بك
           serviceWorkerParam: { scope: '/'},
           serviceWorkerPath: 'OneSignalSDKWorker.js',
-          subdomainName: 'YOUR_ONESIGNAL_SUBDOMAIN' // استبدل هذا بنطاقك الفرعي في OneSignal
+          subdomainName: 'https://smartprof.netlify.app/' // استبدل هذا بنطاقك الفرعي في OneSignal
         });
       });
     </script>
@@ -195,4 +195,5 @@
     <script src="script.js"></script>
     <script src="service-worker.js"></script>
 </body>
+
 </html>
