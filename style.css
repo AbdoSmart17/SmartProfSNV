@@ -1,98 +1,153 @@
+/*
+    =======================================================
+    ملف الأنماط - SmartProf
+    =======================================================
+*/
+
+/* 1. الأنماط العامة و الخطوط */
 body {
     font-family: 'Cairo', 'Vazirmatn', sans-serif;
     direction: rtl;
     text-align: right;
-    background-color: #f8f9fa;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* خلفية متدرجة */
+    color: #495057; /* لون النص الأساسي */
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* يجعل الـ body يغطي كامل ارتفاع الشاشة */
+    min-height: 100vh;
 }
 
 .container-fluid {
     max-width: 1200px;
 }
 
+/* 2. الإطار العلوي (Header) */
 header {
-    padding: 2rem 0;
-    border-bottom: 2px solid #e9ecef;
-    position: sticky; /* لجعل الـ header ثابتًا */
+    background-color: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شبه شفافة */
+    backdrop-filter: blur(5px); /* تأثير ضبابي */
+    border-bottom: 1px solid #e9ecef;
+    padding: 1.5rem 0; /* تصغير المسافة العلوية والسفلية */
+    position: sticky;
     top: 0;
-    z-index: 1000; /* لضمان ظهوره فوق المحتوى */
-    background-color: #f8f9fa; /* إضافة لون خلفية لضمان عدم اختراق المحتوى له */
+    z-index: 1000;
 }
 
-.text-info {
-    color: #0d6efd !important;
+header h1 {
+    font-weight: 700; /* خط سميك */
+    color: #3b5998; /* لون أزرق جذاب */
+    letter-spacing: 1px;
 }
 
+/* 3. البطاقات (Cards) */
 .card {
     border: none;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 1.25rem; /* حواف أكثر استدارة */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* ظل أكبر وأكثر نعومة */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* تأثيرات عند التمرير */
 }
 
-.form-label {
-    font-weight: bold;
+.card:hover {
+    transform: translateY(-5px); /* رفع البطاقة قليلًا عند التمرير */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
-.task-item .task-content h5 {
-    color: #0d6efd;
-    font-weight: bold;
+.card-title {
+    font-weight: 600;
+    color: #3b5998;
+    border-bottom: 2px solid #3b5998;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
-.task-item .task-content p {
-    font-size: 0.9rem;
-    color: #495057;
+/* 4. الأزرار (Buttons) */
+.btn-info,
+.bg-info,
+.btn-secondary {
+    border-radius: 50px; /* أزرار دائرية */
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
 }
 
-.task-item .task-actions button {
-    margin-left: 0.5rem;
+.btn-info {
+    background-color: #3b5998 !important;
+    border-color: #3b5998 !important;
+    color: #fff !important;
 }
 
-.task-completed {
-    text-decoration: line-through;
-    opacity: 0.6;
+.btn-info:hover {
+    background-color: #4c69a5 !important;
+    border-color: #4c69a5 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.task-completed .task-content h5 {
-    color: #6c757d;
+.btn-secondary {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+    color: #fff !important;
 }
 
-/* أنماط الجدول الزمني */
+.btn-secondary:hover {
+    background-color: #5a6268 !important;
+    border-color: #5a6268 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 5. حقول الإدخال والقوائم المنسدلة */
+.form-control,
+.form-select {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #3b5998;
+    box-shadow: 0 0 0 0.25rem rgba(59, 89, 152, 0.25);
+}
+
+/* 6. أنماط الجدول الزمني */
 .table-responsive {
-    overflow-x: auto; /* يجعل الجدول قابلاً للتمرير أفقيًا على الشاشات الصغيرة */
+    overflow-x: auto;
 }
 
 #schedule-table {
-    min-width: 600px; /* يضمن أن الجدول له عرض أدنى لتجنب ضغط المحتوى */
+    min-width: 600px;
+    border-radius: 1rem;
+    overflow: hidden; /* لإخفاء الحواف الزائدة للجدول */
 }
 
 #schedule-table th,
 #schedule-table td {
-    padding: 0.75rem;
+    padding: 1rem 0.75rem; /* زيادة المسافة الداخلية */
     border: 1px solid #dee2e6;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 #schedule-table th {
-    background-color: #0d6efd;
+    background-color: #3b5998;
     color: white;
     text-align: center;
+    font-weight: 600;
 }
 
 .schedule-item-cell {
     position: relative;
     background-color: #e9f5ff;
     border: 1px solid #cce5ff;
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    margin: 0.25rem 0;
-    line-height: 1.2;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    margin: 0.5rem 0;
+    line-height: 1.4;
     text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .schedule-item-cell p {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin: 0;
 }
 
@@ -103,7 +158,7 @@ header {
     background: transparent;
     border: none;
     color: #dc3545;
-    font-size: 0.8rem;
+    font-size: 1rem; /* تكبير أيقونة الحذف */
     cursor: pointer;
     opacity: 0.7;
     transition: opacity 0.2s;
@@ -113,26 +168,52 @@ header {
     opacity: 1;
 }
 
-/* أنماط الإطار السفلي (Footer) */
+/* 7. أنماط المهام */
+.alert-primary {
+    background-color: #e9f5ff; /* لون فاتح متناسق */
+    border-color: #cce5ff;
+    border-radius: 1rem;
+}
+
+.task-item h5 {
+    color: #3b5998 !important;
+}
+
+.task-completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.task-completed h5, .task-completed p {
+    color: #6c757d !important;
+}
+
+/* 8. أنماط الإطار السفلي (Footer) */
 footer {
     padding-top: 2rem;
     padding-bottom: 2rem;
-    margin-top: auto; /* يدفع الـ footer إلى أسفل الصفحة */
+    margin-top: auto;
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+footer .text-info {
+    color: #3b5998 !important;
 }
 
 footer .text-dark:hover {
-    color: #0d6efd !important;
+    color: #3b5998 !important;
 }
 
-/* Media query for smaller screens */
+/* 9. Media Queries لتحسين المظهر على الهواتف */
 @media (max-width: 768px) {
     .schedule-item-cell {
-        font-size: 0.75rem; /* تصغير حجم الخط */
+        font-size: 0.75rem;
         padding: 0.25rem;
     }
     #schedule-table th,
     #schedule-table td {
-        padding: 0.5rem; /* تصغير المسافة الداخلية */
+        padding: 0.5rem;
     }
     .task-item .task-content p,
     .task-item .task-content h5 {
