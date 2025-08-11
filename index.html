@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartProf</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0d6efd">
+    
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+      window.OneSignalDeferred = window.OneSignalDeferred || [];
+      OneSignalDeferred.push(function(OneSignal) {
+        OneSignal.init({
+          appId: "YOUR_ONESIGNAL_APP_ID", // يجب استبدال هذا بمعرف التطبيق الخاص بك
+          serviceWorkerParam: { scope: '/'},
+          serviceWorkerPath: 'OneSignalSDKWorker.js',
+          subdomainName: 'YOUR_ONESIGNAL_SUBDOMAIN' // استبدل هذا بنطاقك الفرعي في OneSignal
+        });
+      });
+    </script>
+</head>
+<body>
+    <header class="bg-white shadow-sm mb-4 sticky-top">
+        <div class="container-fluid">
+            <h1 class="text-info text-center py-3">SmartProf</h1>
+        </div>
+    </header>
+    <main class="container-fluid py-4">
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card p-4">
+                    <h2 class="h5 card-title text-info mb-3">إضافة حصة جديدة</h2>
+                    <form id="schedule-form">
+                        <div class="mb-3">
+                            <label for="schedule-day" class="form-label">اليوم</label>
+                            <select id="schedule-day" class="form-select" required>
+                                <option value="الأحد">الأحد</option>
+                                <option value="الاثنين">الاثنين</option>
+                                <option value="الثلاثاء">الثلاثاء</option>
+                                <option value="الأربعاء">الأربعاء</option>
+                                <option value="الخميس">الخميس</option>
+                            </select>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="schedule-start-time" class="form-label">وقت البدء</label>
+                                <input type="time" id="schedule-start-time" class="form-control" required>
+                            </div>
+                            <div class="col">
+                                <label for="schedule-end-time" class="form-label">وقت الانتهاء</label>
+                                <input type="time" id="schedule-end-time" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="schedule-level-select" class="form-label">المستوى</label>
+                                <select id="schedule-level-select" class="form-select" required>
+                                    <option value="الأولى">الأولى</option>
+                                    <option value="الثانية">الثانية</option>
+                                    <option value="الثالثة">الثالثة</option>
+                                    <option value="الرابعة">الرابعة</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="schedule-class-number" class="form-label">رقم القسم</label>
+                                <input type="number" id="schedule-class-number" class="form-control" min="1" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info w-100"><i class="fa-solid fa-plus me-1"></i> إضافة حصة</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card p-4">
+                    <h2 class="h5 card-title text-info mb-3">إضافة مهمة جديدة</h2>
+                    <form id="task-form">
+                        <div class="mb-3">
+                            <label for="task-date" class="form-label">تاريخ المهمة (تاريخ الحصة)</label>
+                            <input type="date" id="task-date" class="form-control" required>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="task-notification-duration" class="form-label">التنبيه قبل الحصة (بالدقائق)</label>
+                                <input type="number" id="task-notification-duration" class="form-control" min="1" value="10" required>
+                            </div>
+                            <div class="col">
+                                <label for="task-alert-type" class="form-label">نوع التنبيه</label>
+                                <select id="task-alert-type" class="form-select" required>
+                                    <option value="مراجعة">مراجعة</option>
+                                    <option value="واجب">واجب</option>
+                                    <option value="تحضير">تحضير</option>
+                                    <option value="اختبار">اختبار</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task-class-select" class="form-label">القسم</label>
+                            <select id="task-class-select" class="form-select" required>
+                                <option value="">اختر قسم (بعد اختيار التاريخ)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task-field-select" class="form-label">الميدان</label>
+                            <select id="task-field-select" class="form-select" required>
+                                <option value="">اختر ميدان</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task-module-select" class="form-label">المقطع</label>
+                            <select id="task-module-select" class="form-select" required>
+                                <option value="">اختر مقطع</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task-activity-select" class="form-label">النشاط</label>
+                            <select id="task-activity-select" class="form-select" required>
+                                <option value="">اختر نشاط</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task-text" class="form-label">ملاحظات المهمة</label>
+                            <textarea id="task-text" class="form-control" rows="2" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-info w-100"><i class="fa-solid fa-bell me-1"></i> إضافة مهمة</button>
+                        <button type="button" id="enable-notifications-btn" class="btn btn-secondary mt-2 w-100">تفعيل التنبيهات</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card p-4">
+                    <h2 class="h5 card-title text-info mb-3">الجدول الأسبوعي</h2>
+                    <div class="table-responsive">
+                        <table id="schedule-table" class="table table-bordered text-center">
+                            <thead class="bg-info text-white">
+                                <tr>
+                                    <th>الوقت</th>
+                                    <th>الأحد</th>
+                                    <th>الاثنين</th>
+                                    <th>الثلاثاء</th>
+                                    <th>الأربعاء</th>
+                                    <th>الخميس</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card p-4">
+                    <h2 class="h5 card-title text-info mb-3">المهام المجدولة</h2>
+                    <div id="tasks-list">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-light text-center text-lg-start mt-auto">
+        <div class="container p-4">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-info">تطبيق SmartProf</h5>
+                    <p>
+                        SmartProfنظام تحديد المهام والانشطة التعليمية 
+                    </p>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase text-info">للتواصل والدعم</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="mailto:your.email@example.com" class="text-dark">
+                                <i class="fas fa-envelope me-2"></i>abdo.bagua@yahoo.fr
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="text-center p-3 text-white" style="background-color: #0d6efd;">
+            © 2025 SmartProf: جميع الحقوق محفوظة
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="service-worker.js"></script>
+</body>
+</html>
