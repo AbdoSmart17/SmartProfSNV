@@ -379,12 +379,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const scheduleNotifications = () => {
         // إلغاء جميع التنبيهات السابقة
-     //   tasks.forEach(task => {
-      //      if (task.notificationTimeout) {
-       //         clearTimeout(task.notificationTimeout);
-      //          delete task.notificationTimeout;
-      //      }
-      //  });
+        tasks.forEach(task => {
+             if (task.notificationTimeout) {
+               clearTimeout(task.notificationTimeout);
+                delete task.notificationTimeout;
+            }
+        });
         
         // جدولة تنبيهات جديدة
         tasks.forEach(task => {
@@ -754,3 +754,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // بدء التطبيق
     initApp();
 });
+
