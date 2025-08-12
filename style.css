@@ -1,229 +1,168 @@
-/*
-    =======================================================
-    ملف الأنماط - SmartProf
-    =======================================================
-*/
+/* Fonts & Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
 
-/* 1. الأنماط العامة و الخطوط */
+:root {
+  --primary: #0d6efd;
+  --secondary: #6c757d;
+  --success: #198754;
+  --danger: #dc3545;
+  --warning: #ffc107;
+  --info: #0dcaf0;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --arabic-font: 'Cairo', sans-serif;
+}
+
 body {
-    font-family: 'Cairo', 'Vazirmatn', sans-serif;
-    direction: rtl;
-    text-align: right;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* خلفية متدرجة */
-    color: #495057; /* لون النص الأساسي */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-family: var(--arabic-font);
+  direction: rtl;
+  background-color: #f5f7fa;
+  line-height: 1.8;
 }
 
-.container-fluid {
-    max-width: 1200px;
+/* Alerts Container */
+#alert-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 9999;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-/* 2. الإطار العلوي (Header) */
-header {
-    background-color: rgba(255, 255, 255, 0.95); /* خلفية بيضاء شبه شفافة */
-    backdrop-filter: blur(5px); /* تأثير ضبابي */
-    border-bottom: 1px solid #e9ecef;
-    padding: 1.5rem 0; /* تصغير المسافة العلوية والسفلية */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+/* Custom Alert Styles */
+.alert {
+  border: none;
+  border-right: 4px solid transparent;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
-header h1 {
-    font-weight: 700; /* خط سميك */
-    color: #3b5998; /* لون أزرق جذاب */
-    letter-spacing: 1px;
+.alert-warning {
+  background-color: #fff3cd;
+  color: #664d03;
+  border-right-color: var(--warning);
 }
 
-/* 3. البطاقات (Cards) */
+.alert-danger {
+  background-color: #f8d7da;
+  color: #58151c;
+  border-right-color: var(--danger);
+}
+
+.alert i {
+  margin-left: 8px;
+}
+
+/* Form Validation */
+.is-invalid {
+  border-color: var(--danger) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: left calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  padding-left: 2.5rem;
+}
+
+.invalid-feedback {
+  display: none;
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: var(--danger);
+}
+
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-control:invalid ~ .invalid-tooltip,
+.form-control.is-invalid ~ .invalid-feedback,
+.form-control.is-invalid ~ .invalid-tooltip {
+  display: block;
+}
+
+/* Date Input Warning */
+.date-warning {
+  font-size: 0.8rem;
+  color: var(--danger);
+  display: none;
+  margin-top: 0.25rem;
+}
+
+/* Cards & Layout */
 .card {
-    border: none;
-    border-radius: 1.25rem; /* حواف أكثر استدارة */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* ظل أكبر وأكثر نعومة */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* تأثيرات عند التمرير */
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border: none;
+  margin-bottom: 1.5rem;
 }
 
-.card:hover {
-    transform: translateY(-5px); /* رفع البطاقة قليلًا عند التمرير */
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+.card-header {
+  background-color: rgba(13, 110, 253, 0.03);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.card-title {
-    font-weight: 600;
-    color: #3b5998;
-    border-bottom: 2px solid #3b5998;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-/* 4. الأزرار (Buttons) */
-.btn-info,
-.bg-info,
-.btn-secondary {
-    border-radius: 50px; /* أزرار دائرية */
-    font-weight: 600;
-    padding: 0.75rem 1.5rem;
-    transition: all 0.3s ease;
-}
-
-.btn-info {
-    background-color: #3b5998 !important;
-    border-color: #3b5998 !important;
-    color: #fff !important;
-}
-
-.btn-info:hover {
-    background-color: #4c69a5 !important;
-    border-color: #4c69a5 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.btn-secondary {
-    background-color: #6c757d !important;
-    border-color: #6c757d !important;
-    color: #fff !important;
-}
-
-.btn-secondary:hover {
-    background-color: #5a6268 !important;
-    border-color: #5a6268 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 5. حقول الإدخال والقوائم المنسدلة */
-.form-control,
-.form-select {
-    border-radius: 10px;
-    border: 1px solid #ced4da;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
-    transition: all 0.3s ease;
-}
-
-.form-control:focus,
-.form-select:focus {
-    border-color: #3b5998;
-    box-shadow: 0 0 0 0.25rem rgba(59, 89, 152, 0.25);
-}
-
-/* 6. أنماط الجدول الزمني */
-.table-responsive {
-    overflow-x: auto;
-}
-
-#schedule-table {
-    min-width: 600px;
-    border-radius: 1rem;
-    overflow: hidden; /* لإخفاء الحواف الزائدة للجدول */
-}
-
-#schedule-table th,
-#schedule-table td {
-    padding: 1rem 0.75rem; /* زيادة المسافة الداخلية */
-    border: 1px solid #dee2e6;
-    vertical-align: middle;
-}
-
+/* Schedule Table */
 #schedule-table th {
-    background-color: #3b5998;
-    color: white;
-    text-align: center;
-    font-weight: 600;
+  background-color: var(--primary);
+  color: white;
+  font-weight: 600;
 }
 
 .schedule-item-cell {
-    position: relative;
-    background-color: #e9f5ff;
-    border: 1px solid #cce5ff;
-    border-radius: 0.75rem;
-    padding: 0.75rem;
-    margin: 0.5rem 0;
-    line-height: 1.4;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
+  background-color: #e9f5ff;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  margin: 0.25rem 0;
 }
 
-.schedule-item-cell p {
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-.btn-delete-schedule {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    background: transparent;
-    border: none;
-    color: #dc3545;
-    font-size: 1rem; /* تكبير أيقونة الحذف */
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-}
-
-.btn-delete-schedule:hover {
-    opacity: 1;
-}
-
-/* 7. أنماط المهام */
-.alert-primary {
-    background-color: #e9f5ff; /* لون فاتح متناسق */
-    border-color: #cce5ff;
-    border-radius: 1rem;
-}
-
-.task-item h5 {
-    color: #3b5998 !important;
+/* Task Items */
+.task-item {
+  transition: all 0.3s ease;
+  border-right: 4px solid var(--primary);
 }
 
 .task-completed {
-    text-decoration: line-through;
-    opacity: 0.6;
+  border-right-color: var(--success);
+  opacity: 0.8;
 }
 
-.task-completed h5, .task-completed p {
-    color: #6c757d !important;
+.task-urgent {
+  border-right-color: var(--danger);
+  animation: pulse 1.5s infinite;
 }
 
-/* 8. أنماط الإطار السفلي (Footer) */
-footer {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    margin-top: auto;
-    background-color: #f8f9fa;
-    border-top: 1px solid #e9ecef;
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 1; }
 }
 
-footer .text-info {
-    color: #3b5998 !important;
+/* Buttons */
+.btn {
+  font-weight: 600;
+  padding: 0.5rem 1.25rem;
 }
 
-footer .text-dark:hover {
-    color: #3b5998 !important;
-}
-
-/* 9. Media Queries لتحسين المظهر على الهواتف */
+/* Responsive Adjustments */
 @media (max-width: 768px) {
-    .schedule-item-cell {
-        font-size: 0.75rem;
-        padding: 0.25rem;
-    }
-    #schedule-table th,
-    #schedule-table td {
-        padding: 0.5rem;
-    }
-    .task-item .task-content p,
-    .task-item .task-content h5 {
-        font-size: 0.8rem;
-    }
-    .task-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .task-item .task-actions {
-        margin-top: 1rem;
-    }
+  .card {
+    margin-bottom: 1rem;
+  }
+  
+  #alert-container {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+  }
+}
+
+/* Animation for Time Warnings */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.time-warning {
+  animation: shake 0.5s ease-in-out;
 }
