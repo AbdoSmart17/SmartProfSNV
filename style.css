@@ -155,7 +155,6 @@ body {
     top: 10px;
   }
 
-  /* تعديلات مقترحة */
   body {
     font-size: 14px;
   }
@@ -195,6 +194,10 @@ body {
     max-width: 100%;
   }
 
+  /* إضافة مسافة بين أزرار المهام على الهواتف */
+  .btn-group .btn {
+    margin-bottom: 0.5rem;
+  }
 }
 
 /* Animation for Time Warnings */
